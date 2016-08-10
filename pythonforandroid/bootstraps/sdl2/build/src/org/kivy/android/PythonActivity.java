@@ -52,8 +52,6 @@ public class PythonActivity extends SDLActivity {
     protected void onCreate(Bundle savedInstanceState) {
         Log.v(TAG, "My oncreate running");
         resourceManager = new ResourceManager(this);
-        this.showLoadingScreen();
-
         Log.v(TAG, "Ready to unpack");
         unpackData("private", getFilesDir());
 
@@ -61,6 +59,7 @@ public class PythonActivity extends SDLActivity {
         super.onCreate(savedInstanceState);
         Log.v(TAG, "Did super onCreate");
 
+        this.showLoadingScreen();
         this.mActivity = this;
 
         String mFilesDirectory = mActivity.getFilesDir().getAbsolutePath();
