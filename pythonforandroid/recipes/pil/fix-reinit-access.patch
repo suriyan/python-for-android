@@ -1,0 +1,26 @@
+--- Imaging-1.1.7/_imaging.c.orig       2016-08-16 11:22:50.645124791 +0700
++++ Imaging-1.1.7/_imaging.c    2016-08-16 11:22:30.833125194 +0700
+@@ -3251,6 +3251,7 @@
+ {
+     PyObject* m;
+     PyObject* d;
++    static int is_init = 0;
+
+     /* Patch object type */
+     Imaging_Type.ob_type = &PyType_Type;
+@@ -3260,7 +3261,13 @@
+ #endif
+     PixelAccess_Type.ob_type = &PyType_Type;
+
+-    ImagingAccessInit();
++    /* FIXME: prevent exit(1) in libImaging/Access.c due to hash collision
++     * if it's re-initialized.
++     */
++    if (!is_init) {
++        ImagingAccessInit();
++        is_init = 1;
++    }
+
+     m = Py_InitModule("_imaging", functions);
+     d = PyModule_GetDict(m);
+

@@ -11,7 +11,8 @@ class PILRecipe(CompiledComponentsPythonRecipe):
 	site_packages_name = 'PIL'
 
 	patches = ['disable-tk.patch',
-	           'fix-directories.patch']
+	           'fix-directories.patch',
+		   'fix-reinit-access.patch']
 
 	def get_recipe_env(self, arch=None):
 		env = super(PILRecipe, self).get_recipe_env(arch)
